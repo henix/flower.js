@@ -15,6 +15,10 @@ var csser = {
 		e.className += (' ' + name);
 	},
 	removeClass: function(e, name) {
-		e.className = e.className.replace(new RegExp('(^|\\s)' + name + '(?=\\s|$)', 'gm'), ''); // zero-width assertion
+		e.className = e.className.replace(new RegExp('(^|\\s+)' + name + '(?=\\s|$)', 'gm'), ''); // zero-width assertion
+	},
+	hasClass: function(e, name) {
+		/* NOTE: class names are case sensitive: http://devedge-temp.mozilla.org/viewsource/2001/css-class-id/ */
+		return e.className.match(new RegExp('(^|\\s)' + name + '(\\s|$)', 'gm')) !== null;
 	}
 };
