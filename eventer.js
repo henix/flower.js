@@ -1,4 +1,14 @@
-var eventer = {};
+var eventer = {
+	preventDefault: function(e) {
+		if (typeof e.preventDefault === 'function') {
+			e.preventDefault();
+			e.stopPropagation();
+		} else {
+			e.returnValue = false;
+			e.cancelBubble = true;
+		}
+	}
+};
 if (document.body.addEventListener) {
 	eventer.addEventListener = function(target, eventType, handler) {
 		target.addEventListener(eventType, handler, false);
@@ -12,5 +22,17 @@ if (document.body.addEventListener) {
 	};
 	eventer.removeEventListener = function(target, eventType, handler) {
 		target.detachEvent('on' + eventType, handler);
+	};
+}
+if (document.createEvent) {
+	eventer.fireEvent = function(element, eventType) {
+		var evt = document.createEvent("HTMLEvents");
+		evt.initEvent(eventType, true, true); // type, bubbling, cancelable
+		return !element.dispatchEvent(evt);
+	};
+} else {
+	eventer.fireEvent = function(element, eventType) {
+		var evt = document.createEventObject();
+		return element.fireEvent('on' + eventType, evt);
 	};
 }
