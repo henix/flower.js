@@ -12,7 +12,9 @@ var csser = {
 		head.appendChild(style);
 	},
 	addClass: function(e, name) {
-		e.className += (' ' + name);
+		if (!csser.hasClass(e, name)) {
+			e.className += (' ' + name);
+		}
 	},
 	removeClass: function(e, name) {
 		e.className = e.className.replace(new RegExp('(^|\\s+)' + name + '(?=\\s|$)', 'gm'), ''); // zero-width assertion

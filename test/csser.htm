@@ -23,6 +23,8 @@ window.addEventListener('load', function() {
 		elem.className = '';
 		csser.addClass(elem, "c1");
 		equal(elem.className, ' c1');
+		csser.addClass(elem, "c1");
+		equal(elem.className, ' c1'); // it should not add again if className already exists
 	});
 
 	test('removeClass', function() {
