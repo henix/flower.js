@@ -16,5 +16,45 @@ var ajaxer = {
 		} finally {
 			return req;
 		}
+	},
+	get: function(url, onsuccess, onerror, async) {
+		var req = ajaxer.newXhr();
+		req.onreadystatechange = function() {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					onsuccess(req.responseText);
+				} else {
+					if (onerror) {
+						onerror(req.status, req.responseText);
+					}
+				}
+			}
+		};
+		if (async === true || async === false) {
+			req.open('GET', url, async);
+		} else {
+			req.open('GET', url);
+		}
+		req.send();
+	},
+	post: function(url, data, onsuccess, onerror, async) {
+		var req = ajaxer.newXhr();
+		req.onreadystatechange = function() {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					onsuccess(req.responseText);
+				} else {
+					if (onerror) {
+						onerror(req.status, req.responseText);
+					}
+				}
+			}
+		};
+		if (async === true || async === false) {
+			req.open('POST', url, async);
+		} else {
+			req.open('POST', url);
+		}
+		req.send(data);
 	}
 };
