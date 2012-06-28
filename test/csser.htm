@@ -47,6 +47,9 @@ window.addEventListener('load', function() {
 	test('hasClass', function() {
 		var elem = {};
 
+		elem.className = 'test';
+		strictEqual(csser.hasClass(elem, 'test'), true);
+
 		elem.className = 'A bb';
 		strictEqual(csser.hasClass(elem, 'a'), false);
 		strictEqual(csser.hasClass(elem, 'A'), true);
