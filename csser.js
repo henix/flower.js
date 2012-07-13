@@ -1,5 +1,8 @@
 var csser = {
-	insertSheet: function(ruleString) {
+	prependSheet: function(ruleString) {
+		csser.insertSheet(ruleString, true);
+	},
+	insertSheet: function(ruleString, atstart) {
 		var head = document.getElementsByTagName('head')[0];
 		var style = document.createElement('style');
 		var rules = document.createTextNode(ruleString);
@@ -9,7 +12,11 @@ var csser = {
 		} else {
 			style.appendChild(rules);
 		}
-		head.appendChild(style);
+		if (atstart) {
+			head.insertBefore(style, head.children[0]);
+		} else {
+			head.appendChild(style);
+		}
 	},
 	addClass: function(e, name) {
 		if (!csser.hasClass(e, name)) {
