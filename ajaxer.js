@@ -1,3 +1,6 @@
+#ifndef AJAXER_JS_
+#define AJAXER_JS_
+
 var ajaxer = {
 	newXhr: function() {
 		var msxml_progid = ['MSXML2.XMLHTTP.6.0', 'MSXML3.XMLHTTP',
@@ -55,6 +58,9 @@ var ajaxer = {
 		} else {
 			req.open('POST', url);
 		}
+		req.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		req.send(data);
 	}
 };
+
+#endif // AJAXER_JS_
