@@ -1,6 +1,6 @@
 var csser = {
 	prependSheet: function(ruleString) {
-		csser.insertSheet(ruleString, true);
+		this.insertSheet(ruleString, true);
 	},
 	insertSheet: function(ruleString, atstart) {
 		var head = document.getElementsByTagName('head')[0];
@@ -19,7 +19,7 @@ var csser = {
 		}
 	},
 	addClass: function(e, name) {
-		if (!csser.hasClass(e, name)) {
+		if (!this.hasClass(e, name)) {
 			e.className += (' ' + name);
 		}
 	},
