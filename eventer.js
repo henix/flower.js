@@ -1,3 +1,6 @@
+#ifndef EVENTER_JS_
+#define EVENTER_JS_
+
 var eventer = {
 	preventDefault: function(e) {
 		if (typeof e.preventDefault === 'function') {
@@ -9,6 +12,7 @@ var eventer = {
 		}
 	}
 };
+
 if (document.body.addEventListener) {
 	eventer.addEventListener = function(target, eventType, handler) {
 		target.addEventListener(eventType, handler, false);
@@ -24,6 +28,7 @@ if (document.body.addEventListener) {
 		target.detachEvent('on' + eventType, handler);
 	};
 }
+
 if (document.createEvent) {
 	eventer.fireEvent = function(element, eventType) {
 		var evt = document.createEvent("HTMLEvents");
@@ -36,3 +41,5 @@ if (document.createEvent) {
 		return element.fireEvent('on' + eventType, evt);
 	};
 }
+
+#endif // EVENTER_JS_
