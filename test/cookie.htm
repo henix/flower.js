@@ -12,11 +12,13 @@
 
 <script type="text/javascript" src="/test/qunit.js"></script>
 
-<script type="text/javascript" src="/cookie.js"></script>
+<script type="text/javascript" src="/flower-0.1.js"></script>
 
 <script type="text/javascript">
 window.addEventListener('load', function() {
 	module('cookie.js');
+
+	var cookie = Flower.cookie;
 
 	test('simpleset', function() {
 		cookie.set('test', 'abcdefgh');
