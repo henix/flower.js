@@ -1,6 +1,8 @@
 #ifndef AJAXER_JS_
 #define AJAXER_JS_
 
+#include "assert.js"
+
 var ajaxer = {
 	newXhr: function() {
 		var msxml_progid = ['MSXML2.XMLHTTP.6.0', 'MSXML3.XMLHTTP',
@@ -21,6 +23,9 @@ var ajaxer = {
 		}
 	},
 	get: function(url, onsuccess, onerror, async) {
+		assert.present(url);
+		assert.present(onsuccess);
+
 		var req = ajaxer.newXhr();
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
@@ -41,6 +46,9 @@ var ajaxer = {
 		req.send();
 	},
 	post: function(url, data, onsuccess, onerror, async) {
+		assert.present(url);
+		assert.present(onsuccess);
+
 		var req = ajaxer.newXhr();
 		req.onreadystatechange = function() {
 			if (req.readyState == 4) {
