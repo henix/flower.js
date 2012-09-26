@@ -43,7 +43,7 @@ var cookie = {
 			return str.replace(/%/g, '%25').replace(/;/g, '%3B');
 		}
 		var expires;
-		if (days) {
+		if (ms) {
 			var date = new Date();
 			date.setTime(date.getTime() + ms);
 			expires = "; expires=" + date.toGMTString();
