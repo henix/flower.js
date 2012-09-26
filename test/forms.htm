@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/test/qunit.css" type="text/css" />
+<title>QUnit - forms</title>
+</head>
+<body>
+<h1 id="qunit-header">QUnit</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+
+<script type="text/javascript" src="/test/qunit.js"></script>
+
+<script type="text/javascript" src="/flower-0.1.js"></script>
+
+<script type="text/javascript">
+window.addEventListener('load', function() {
+	module('forms.js');
+
+	test('basic parse', function() {
+		var ret = Flower.formdata.parse('a=%2525&b=%26&c=3', ['a', 'b', 'c']);
+		equal(Flower.formdata.get(ret, 'a'), '%25');
+		equal(Flower.formdata.get(ret, 'b'), '&');
+		equal(Flower.formdata.get(ret, 'c'), '3');
+	});
+
+	test('empty key', function() {
+		var ret = Flower.formdata.parse('=2', ['']);
+		equal(Flower.formdata.get(ret, ''), '2');
+	});
+
+	test('encode', function() {
+		var q = Flower.formdata.newValue();
+		Flower.formdata.add(q, 'a', '"');
+		Flower.formdata.add(q, 'a', '%');
+		Flower.formdata.add(q, 'b', '&=');
+
+		var raw = Flower.formdata.encode(q);
+		ok(raw.indexOf('a=%22') != -1);
+		ok(raw.indexOf('a=%25') != -1);
+		ok(raw.indexOf('b=%26%3D') != -1);
+	});
+});
+</script>
+</body>
+</html>

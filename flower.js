@@ -9,22 +9,46 @@ var Flower = {version:0.1};
 (function(global) {
 "use strict";
 
-#include "parseArgs.js"
+#include "ecma5.js"
+
+#include "assert.js"
+global.AssertError = AssertError;
+global.assert = assert;
+#include "errors.js"
+global.ArgumentError = ArgumentError;
+
+#include "string.js"
+global.string = string;
+
+#include "cookie.js"
+global.cookie = cookie;
+global.TimeUnits = TimeUnits;
 
 #include "csser.js"
-#include "findPos.js"
+global.csser = csser;
 #include "eventer.js"
+global.eventer = eventer;
+
 #include "ajaxer.js"
+global.ajaxer = ajaxer;
+#include "forms.js"
+global.formdata = formdata;
+#include "ajaxForm.js"
+global.AjaxForm = AjaxForm;
 
 #include "detectIE.js"
-
-global.parseArgs = parseArgs;
-
-global.csser = csser;
-global.findPos = findPos;
-global.eventer = eventer;
-global.ajaxer = ajaxer;
-
 global.ieVersion = detectIE;
+
+#include "findPos.js"
+global.findPos = findPos;
+
+global.getTemplate = function (name) {
+	var elem = document.querySelector('script[name=' + name + ']');
+	if (!elem) {
+		return null;
+	}
+	var text = elem.innerHTML;
+	return text;
+};
 
 })(Flower);
