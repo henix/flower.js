@@ -11,25 +11,38 @@ AssertError.prototype.constructor = AssertError;
 var assert = {
 	isTrue: function(cond, msg) {
 		if (cond !== true) {
-			throw new AssertError(msg || 'condition is not true');
+			msg = msg ? ': ' + msg : '';
+			throw new AssertError('condition ' + cond + ' is not true: ' + msg);
+		}
+	},
+	isFalse: function(cond, msg) {
+		if (cond !== false) {
+			msg = msg ? ': ' + msg : '';
+			throw new AssertError('condition ' + cond + ' is not false: ' + msg);
 		}
 	},
 	present: function(obj, msg) {
 		if (!obj) {
-			throw new AssertError(msg || 'object null or undefined');
+			msg = msg ? ': ' + msg : '';
+			throw new AssertError('object null or undefined: ' + msg);
+		}
+	},
+	notPresent: function(obj, msg) {
+		if (obj) {
+			msg = msg ? ': ' + msg : '';
+			throw new AssertError('object is present: ' + msg);
 		}
 	},
 	equals: function(actuall, expected, msg) {
 		if (actuall != expected) {
-			if (!msg) {
-				msg = actuall + ' != ' + expected + ' (expected)';
-			}
-			throw new AssertError(msg);
+			msg = msg ? ': ' + msg : '';
+			throw new AssertError(actuall + ' != ' + expected + ' (expected)' + msg);
 		}
 	},
 	notEmpty: function(str, msg) {
 		if (str.length === 0) {
-			throw new AssertError(msg || 'string is empty');
+			msg = msg ? ': ' + msg : '';
+			throw new AssertError('string is empty' + msg);
 		}
 	}
 };
