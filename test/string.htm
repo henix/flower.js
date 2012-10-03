@@ -33,6 +33,12 @@ window.addEventListener('load', function() {
 		strictEqual(string.endsWith(s, 'll'), false);
 		strictEqual(string.endsWith(s, 'jlo'), false);
 	});
+	
+	test('removeEnd', function() {
+		var s = 'hello';
+		strictEqual(string.removeEnd(s, 'llo'), 'he');
+		strictEqual(string.removeEnd(s, 'll'), 'hello');
+	});
 });
 </script>
 </body>

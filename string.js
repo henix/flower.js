@@ -6,5 +6,11 @@ var string = {
 	},
 	endsWith: function(str, suffix) {
 		return str.indexOf(suffix, str.length - suffix.length) !== -1;
+	},
+	removeEnd: function(str, suffix) {
+		if (this.endsWith(str, suffix)) {
+			return str.substring(0, str.length - suffix.length);
+		}
+		return str;
 	}
 };
