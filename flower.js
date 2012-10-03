@@ -28,6 +28,8 @@ global.TimeUnits = TimeUnits;
 global.csser = csser;
 #include "eventer.js"
 global.eventer = eventer;
+#include "domer.js"
+global.domer = domer;
 
 #include "ajaxer.js"
 global.ajaxer = ajaxer;
@@ -49,6 +51,15 @@ global.getTemplate = function (name) {
 	}
 	var text = elem.innerHTML;
 	return text;
+};
+
+global.executeDFA = function(dfa, start) {
+	var cur = start || 'start';
+	while (cur) {
+		Flower.assert.equals(typeof(cur), 'string');
+		Flower.assert.equals(typeof(dfa[cur]), 'function');
+		cur = dfa[cur]();
+	}
 };
 
 })(Flower);
