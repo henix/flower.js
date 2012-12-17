@@ -42,7 +42,7 @@ var formdata = {
 		for (var i = 0; i < names.length; i++) {
 			valid[names[i]] = true;
 		}
-		var ret = formdata.newValue();
+		var ret = this.newValue();
 		var start = 0;
 		var end;
 		while (start < data.length) {
