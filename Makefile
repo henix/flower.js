@@ -1,2 +1,12 @@
-flower-0.1.js: flower.js ecma5.js assert.js errors.js string.js cookie.js csser.js eventer.js domer.js ajaxer.js forms.js ajaxForm.js detectIE.js findPos.js
-	cpp -P -C -I "." $< > $@
+-include config.mk
+
+.PHONY: clean
+
+NAME=flower
+
+dist/$(NAME).js: $(NAME).js $(NAME).moddef
+	mkdir -p dist
+	"$(RAINY_PATH)/rain" --moddef "$(BASEJS_PATH)/base.moddef" --moddef "$(NAME).moddef" --incpath "$(BASEJS_PATH)/.." --incpath ".." $< > $@
+
+clean:
+	rm dist/$(NAME).js

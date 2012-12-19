@@ -1,4 +1,4 @@
-var string = {
+Flower.string = {
 	/* see http://stackoverflow.com/questions/646628/javascript-startswith */
 	/* benchmark: http://jsperf.com/js-startswith/6 */
 	startsWith: function(str, prefix) {

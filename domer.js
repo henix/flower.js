@@ -1,7 +1,4 @@
-#ifndef DOMER_JS_
-#define DOMER_JS_
-
-var domer = {
+Flower.domer = {
 	getText: function(node) {
 		return node.textContent || node.innerText || '';
 	},
@@ -42,5 +39,3 @@ var domer = {
 		return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
 	}
 };
-
-#endif // DOMER_JS_

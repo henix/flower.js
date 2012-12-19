@@ -1,0 +1,27 @@
+dir Flower flower.js {
+	*before_all: before_all.js
+
+	string:
+
+	TimeUnit:
+	cookie:
+	cookie -> ::Base.Assert.present ::Base.Assert.isTrue
+
+	csser:
+	dir eventer eventer {
+		*before_all: before_all.js
+		preventDefault:
+		addEventListener:
+		fireEvent:
+	}
+	domer:
+
+	ajaxer:
+	ajaxer -> ::Base.Assert.present
+	forms:
+	forms -> ::Base.ecma5.Object-keys ::Base.ecma5.String-trim
+	ajaxForm:
+	ajaxForm -> ::Base.Assert.present ::Base.Assert.fail forms ajaxer
+
+	ieVersion: detectIE.js
+}

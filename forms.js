@@ -1,9 +1,4 @@
-#ifndef FORMS_JS_
-#define FORMS_JS_
-
-#include "ecma5.js"
-
-var formdata = {
+Flower.formdata = {
 	newValue: function() {
 		return {};
 	},
@@ -56,7 +51,7 @@ var formdata = {
 				var key = decodeURIComponent(section.substring(0, sep).trim());
 				if (valid[key]) {
 					var value = decodeURIComponent(section.substring(sep + 1).trim());
-					formdata.add(ret, key, value);
+					this.add(ret, key, value);
 				}
 			}
 			start = end + 1;
@@ -64,5 +59,3 @@ var formdata = {
 		return ret;
 	}
 };
-
-#endif // FORMS_JS_

@@ -1,20 +1,15 @@
-#ifndef AJAXFORM_JS_
-#define AJAXFORM_JS_
-
-#include "errors.js"
-#include "assert.js"
-#include "forms.js"
-#include "ajaxer.js"
+(function() {
 
 function AjaxForm(form, onsuccess, onerror) {
-	assert.present(form);
-	assert.present(onsuccess);
+	Assert.present(form);
+	Assert.present(onsuccess);
 	this.form = form;
 	this.onsuccess = onsuccess;
 	this.onerror = onerror;
 }
 
 AjaxForm.prototype.submit = function() {
+	var formdata = Flower.formdata;
 	// get values
 	var values = formdata.newValue();
 	do {
@@ -44,12 +39,14 @@ AjaxForm.prototype.submit = function() {
 	var method = this.form.method.toLowerCase();
 
 	if (method === 'get') {
-		ajaxer.get(action + '?' + formdata.encode(values), this.onsuccess, this.onerror);
+		Flower.ajaxer.get(action + '?' + formdata.encode(values), this.onsuccess, this.onerror);
 	} else if (method === 'post') {
-		ajaxer.post(action, formdata.encode(values), this.onsuccess, this.onerror);
+		Flower.ajaxer.post(action, formdata.encode(values), this.onsuccess, this.onerror);
 	} else {
-		throw new ArgumentError("Unknown action of form: " + action);
+		Assert.fail("Unknown action of form: " + action);
 	}
 };
 
-#endif // AJAXFORM_JS_
+Flower.AjaxForm = AjaxForm;
+
+})();

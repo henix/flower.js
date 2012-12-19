@@ -1,4 +1,4 @@
-var csser = {
+Flower.csser = {
 	prependSheet: function(ruleString) {
 		this.insertSheet(ruleString, true);
 	},

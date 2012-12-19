@@ -1,3 +1,5 @@
+(function() {
+
 var detectIE = function() {
 	if (detectIE.ieVersion !== undefined) {
 		return detectIE.ieVersion; // cached
@@ -13,3 +15,7 @@ var detectIE = function() {
 	detectIE.ieVersion = v > 4 ? v : null;
 	return detectIE.ieVersion;
 };
+
+Flower.ieVersion = detectIE;
+
+})();

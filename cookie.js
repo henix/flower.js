@@ -4,17 +4,10 @@
  * http://www.w3schools.com/js/js_cookies.asp
  */
 
-#include "assert.js"
+(function () {
 
-var TimeUnits = {};
-TimeUnits.MILLISECONDS = 1;
-TimeUnits.SECONDS = 1000 * TimeUnits.MILLISECONDS;
-TimeUnits.MINUTES = 60 * TimeUnits.SECONDS;
-TimeUnits.HOURS = 60 * TimeUnits.MINUTES;
-TimeUnits.DAYS = 24 * TimeUnits.HOURS;
-
-var cookie = {
-	dict: {},
+Flower.cookie = {
+	dict: null,
 
 	/**
 	 * load cookie to this object
@@ -35,9 +28,9 @@ var cookie = {
 	 * @param name must not have '=' or ';'
 	 */
 	set: function(name, value, ms, path) {
-		assert.present(name);
-		assert.isTrue(name.indexOf('=') === -1, 'name must not contains "="');
-		assert.isTrue(name.indexOf(';') === -1, 'name must not contains ";"');
+		Assert.present(name);
+		Assert.isTrue(name.indexOf('=') === -1, 'name must not contains "="');
+		Assert.isTrue(name.indexOf(';') === -1, 'name must not contains ";"');
 
 		function myescape(str) {
 			return str.replace(/%/g, '%25').replace(/;/g, '%3B');
@@ -65,3 +58,5 @@ var cookie = {
 		return this.dict[name];
 	}
 };
+
+})();
