@@ -9,4 +9,4 @@ dist/$(NAME).js: $(NAME).js $(NAME).moddef
 	"$(RAINY_PATH)/rain" --moddef "$(BASEJS_PATH)/base.moddef" --moddef "$(NAME).moddef" --incpath "$(BASEJS_PATH)/.." --incpath ".." $< > $@
 
 clean:
-	rm dist/$(NAME).js
+	rm -f dist/$(NAME).js
