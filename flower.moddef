@@ -24,4 +24,11 @@ dir Flower flower.js {
 	ajaxForm -> ::Base.Assert.present ::Base.Assert.fail forms ajaxer
 
 	ieVersion: detectIE.js
+
+	dir ie ie {
+		*before_all: before_all.js
+		version:
+		hoverClass:
+		hoverClass -> ::Flower.eventer.addEventListener ::Flower.csser
+	}
 }
