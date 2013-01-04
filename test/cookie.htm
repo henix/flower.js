@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/test/qunit.css" type="text/css" />
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-git.css" type="text/css" />
 <title>QUnit - cookie</title>
 </head>
 <body>
-<h1 id="qunit-header">QUnit</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
+<div id="qunit"></div>
 
-<script type="text/javascript" src="/test/qunit.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/qunit/qunit-git.js"></script>
 
-<script type="text/javascript" src="/flower-0.1.js"></script>
+<script type="text/javascript" src="../dist/flower.js"></script>
 
 <script type="text/javascript">
-window.addEventListener('load', function() {
-	module('cookie.js');
+var cookie = Flower.cookie;
 
-	var cookie = Flower.cookie;
+cookie.load();
 
-	test('simpleset', function() {
-		cookie.set('test', 'abcdefgh');
-		notEqual(document.cookie.indexOf('test=abcdefgh'), -1);
-		cookie.load();
-		equal(cookie.get('test'), 'abcdefgh');
-	});
+test('simpleset', function() {
+	cookie.set('test', 'abcdefgh');
+	notEqual(document.cookie.indexOf('test=abcdefgh'), -1);
+	cookie.load();
+	equal(cookie.get('test'), 'abcdefgh');
+});
 
-	test('set2', function() {
-		cookie.set('set2', '-?&=1'); // case 1: there are '=' in value
-		notEqual(document.cookie.indexOf('set2=-?&=1'), -1);
-		cookie.load();
-		equal(cookie.get('set2'), '-?&=1');
-	});
+test('set2', function() {
+	cookie.set('set2', '-?&=1'); // case 1: there are '=' in value
+	notEqual(document.cookie.indexOf('set2=-?&=1'), -1);
+	cookie.load();
+	equal(cookie.get('set2'), '-?&=1');
+});
 
-	test('set3', function() {
-		cookie.set('set3', ';;;;'); // case 2: ';' in value
-		ok(document.cookie.match(/set3=..../));
-		cookie.load();
-		equal(cookie.get('set3'), ';;;;');
-	});
+test('set3', function() {
+	cookie.set('set3', ';;;;'); // case 2: ';' in value
+	ok(document.cookie.match(/set3=..../));
+	cookie.load();
+	equal(cookie.get('set3'), ';;;;');
+});
 
-	test('remove', function() {
-		cookie.set('remove', 'te%st');
-		cookie.load();
-		equal(cookie.get('remove'), 'te%st');
-		cookie.remove('remove');
-		strictEqual(cookie.get('remove'), undefined);
-	});
+test('remove', function() {
+	cookie.set('remove', 'te%st');
+	cookie.load();
+	equal(cookie.get('remove'), 'te%st');
+	cookie.remove('remove');
+	strictEqual(cookie.get('remove'), undefined);
 });
 </script>
 </body>

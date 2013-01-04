@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/test/qunit.css" type="text/css" />
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-git.css" type="text/css" />
 <title>QUnit - csser</title>
 </head>
 <body>
-<h1 id="qunit-header">QUnit</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
+<div id="qunit"></div>
 
-<script type="text/javascript" src="/test/qunit.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/qunit/qunit-git.js"></script>
 
-<script type="text/javascript" src="/csser.js"></script>
+<script type="text/javascript" src="../dist/flower.js"></script>
 
 <script type="text/javascript">
-window.addEventListener('load', function() {
-	module('csser.js');
+test('addClass', function() {
+	var elem = {};
+	elem.className = '';
+	Flower.csser.addClass(elem, "c1");
+	equal(elem.className, ' c1');
+	Flower.csser.addClass(elem, "c1");
+	equal(elem.className, ' c1'); // it should not add again if className already exists
+});
 
-	test('addClass', function() {
-		var elem = {};
-		elem.className = '';
-		csser.addClass(elem, "c1");
-		equal(elem.className, ' c1');
-		csser.addClass(elem, "c1");
-		equal(elem.className, ' c1'); // it should not add again if className already exists
-	});
+test('removeClass', function() {
+	var elem = {};
+	elem.className = 'f \ng';
+	Flower.csser.removeClass(elem, 'g');
+	equal(elem.className, 'f');
 
-	test('removeClass', function() {
-		var elem = {};
-		elem.className = 'f \ng';
-		csser.removeClass(elem, 'g');
-		equal(elem.className, 'f');
+	// test class names that contains others
+	elem.className = 'gg g  ggg';
+	Flower.csser.removeClass(elem, 'g');
+	equal(elem.className, 'gg  ggg');
 
-		// test class names that contains others
-		elem.className = 'gg g  ggg';
-		csser.removeClass(elem, 'g');
-		equal(elem.className, 'gg  ggg');
+	// test remove fails, and class names are case sensitive
+	elem.className = 'ab cd';
+	Flower.csser.removeClass(elem, 'aB');
+	equal(elem.className, 'ab cd');
+});
 
-		// test remove fails, and class names are case sensitive
-		elem.className = 'ab cd';
-		csser.removeClass(elem, 'aB');
-		equal(elem.className, 'ab cd');
-	});
+test('hasClass', function() {
+	var elem = {};
 
-	test('hasClass', function() {
-		var elem = {};
+	elem.className = 'test';
+	strictEqual(Flower.csser.hasClass(elem, 'test'), true);
 
-		elem.className = 'test';
-		strictEqual(csser.hasClass(elem, 'test'), true);
-
-		elem.className = 'A bb';
-		strictEqual(csser.hasClass(elem, 'a'), false);
-		strictEqual(csser.hasClass(elem, 'A'), true);
-		strictEqual(csser.hasClass(elem, 'b'), false);
-	});
+	elem.className = 'A bb';
+	strictEqual(Flower.csser.hasClass(elem, 'a'), false);
+	strictEqual(Flower.csser.hasClass(elem, 'A'), true);
+	strictEqual(Flower.csser.hasClass(elem, 'b'), false);
 });
 </script>
 </body>
