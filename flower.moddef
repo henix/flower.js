@@ -1,8 +1,6 @@
 dir Flower flower.js {
 	*before_all: before_all.js
 
-	string:
-
 	TimeUnit:
 	cookie:
 	cookie -> ::Base.Assert.present ::Base.Assert.isTrue
@@ -22,8 +20,6 @@ dir Flower flower.js {
 	forms -> ::Base.ecma5.Object-keys ::Base.ecma5.String-trim
 	ajaxForm:
 	ajaxForm -> ::Base.Assert.present ::Base.Assert.fail forms ajaxer
-
-	ieVersion: detectIE.js
 
 	dir ie ie {
 		*before_all: before_all.js
