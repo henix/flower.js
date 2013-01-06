@@ -2,12 +2,10 @@
 
 function AjaxForm(form, onsuccess, onerror) {
 	Assert.present(form);
-	Assert.present(onsuccess);
 	this.form = form;
 	this.onsuccess = onsuccess;
 	this.onerror = onerror;
 }
-
 AjaxForm.prototype.submit = function() {
 	var formdata = Flower.formdata;
 	// get values
